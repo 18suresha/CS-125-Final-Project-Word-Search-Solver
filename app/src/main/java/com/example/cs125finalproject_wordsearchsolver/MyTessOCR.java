@@ -20,7 +20,8 @@ public class MyTessOCR {
     public MyTessOCR(Context context) {
         // TODO Auto-generated constructor stub
         this.context = context;
-        datapath = Environment.getExternalStorageDirectory().toString() + "/ocrctz/";
+        datapath = Environment.getExternalStorageDirectory().toString() + "/ocrctz";
+//        datapath = "/sdcard/" + "ocrctz";
         System.out.println(datapath);
         File dir = new File(datapath + "/tessdata/");
         File file = new File(datapath + "/tessdata/" + "eng.traineddata");
