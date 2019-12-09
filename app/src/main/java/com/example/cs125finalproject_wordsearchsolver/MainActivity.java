@@ -91,7 +91,21 @@ public class MainActivity extends AppCompatActivity {
 
                     String temp = mTessOCR.getOCRResult(bmp);
                     Log.d("debug", "text produced");
-                    Log.d("text", temp);
+//                    Log.d("text", temp);
+//                    FOR word search
+                    String[] arr = temp.split("\n");
+                    String oneLine = "";
+                    for (String s : arr) {
+                        System.out.println(s);
+                        oneLine += s;
+                    }
+                    System.out.println(oneLine);
+//                    FOR words
+//                    for (String s : temp.split("\n ")) {
+//                        for (String s1 : s.split(" ")) {
+//                            System.out.println(s1);
+//                        }
+//                    }
                     break;
 
             }

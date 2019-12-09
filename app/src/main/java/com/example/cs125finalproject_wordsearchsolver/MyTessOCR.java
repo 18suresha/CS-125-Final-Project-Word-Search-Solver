@@ -50,6 +50,7 @@ public class MyTessOCR {
         mTess.setImage(bitmap);
         Log.d("debug", "after set image");
         String result = mTess.getUTF8Text();
+        mTess.end();
         Log.d("debug", "after getUTF8Text");
         return result;
     }
