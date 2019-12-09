@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -48,11 +49,14 @@ public class EnterTheWords extends AppCompatActivity {
                     pickFromGallery();
                     //do text recog
                     wordBankButton.setText("Continue");
+                    wordBankEditText.setVisibility(View.VISIBLE
+                    );
                 } else {
                     String temp = wordBankEditText.getText().toString();
                     wordBankLetters.clear();
-                    for (String t : temp.split("\n")) {
-                        for (String s : temp.split(" ")) {
+                    //temp = temp.replaceAll("\n", "");
+                    for (String s : temp.split("\n")) {
+                        if (s.length() > 0) {
                             wordBankLetters.add(s);
                         }
                     }
@@ -125,6 +129,7 @@ public class EnterTheWords extends AppCompatActivity {
                     }
                     wordBankText.setText(makeWordString(wordBankLetters));
                     wordBankEditText.setText(makeWordString(wordBankLetters));
+                    Toast.makeText(this, "Make sure to double check the input!", Toast.LENGTH_SHORT).show();
                     break;
 
             }

@@ -48,8 +48,8 @@ public class EnterTheWordSearch extends AppCompatActivity {
 
                 } else {
                     Intent capWords = new Intent(EnterTheWordSearch.this, EnterTheWords.class);
-                    wordSearchLetters.replaceAll(" ", "");
-                    wordSearchLetters.replaceAll("\n", "");
+                    wordSearchLetters = wordSearchLetters.replaceAll(" ", "");
+                    wordSearchLetters = wordSearchLetters.replaceAll("\n", "");
                     wordSearchLetters = wordSearchLetters.toUpperCase();
                     capWords.putExtra("wordSearchLetters", wordSearchLetters);
                     startActivity(capWords);

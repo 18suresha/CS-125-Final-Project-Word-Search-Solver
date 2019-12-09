@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Results extends AppCompatActivity {
     String wordSearchLetters;
@@ -41,6 +42,7 @@ public class Results extends AppCompatActivity {
         String temp = wordSearchLetters;
         wordSearch = new ArrayList<>();
         wordBank = getIntent().getStringArrayListExtra("wordBankLetters");
+        Log.d("WORDBANK", wordBank.toString());
         toHighlight = new ArrayList<>();
         int dim = (int) Math.sqrt(wordSearchLetters.length());
         wordSearchArr = new String[dim][dim];

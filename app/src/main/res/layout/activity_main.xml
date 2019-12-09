@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/press_start_2p"
         android:text="Adarsh and Sahaj"
-        android:textColor="#FA0000"
+        android:textColor="#E91E63"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/begin"
         app:layout_constraintEnd_toEndOf="parent"
