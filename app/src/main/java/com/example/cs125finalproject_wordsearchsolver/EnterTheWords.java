@@ -49,8 +49,7 @@ public class EnterTheWords extends AppCompatActivity {
                     pickFromGallery();
                     //do text recog
                     wordBankButton.setText("Continue");
-                    wordBankEditText.setVisibility(View.VISIBLE
-                    );
+                    wordBankEditText.setVisibility(View.VISIBLE);
                 } else {
                     String temp = wordBankEditText.getText().toString();
                     wordBankLetters.clear();
