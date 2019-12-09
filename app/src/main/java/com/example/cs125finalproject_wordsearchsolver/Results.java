@@ -24,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Results extends AppCompatActivity {
-    String letters = "JCJTLZAJAAMNEXCMCFHSAUOBKASZFNRHELRAKENOTLSCHOOLPUMPKINMAPPLEYXX";
+    String wordSearchLetters;
     ArrayList<String> wordSearch;
     String[][] wordSearchArr;
-    ArrayList<String> wordsToFind;
+    ArrayList<String> wordBank;
     ArrayList<Integer> toHighlight;
     WordSearchSolver solver;
     Button home;
@@ -37,19 +37,12 @@ public class Results extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        String temp = letters;
+        wordSearchLetters = getIntent().getStringExtra("wordSearchLetters");
+        String temp = wordSearchLetters;
         wordSearch = new ArrayList<>();
-        wordsToFind = new ArrayList<>();
-        wordsToFind.add("ACORN");
-        wordsToFind.add("APPLE");
-        wordsToFind.add("FALL");
-        wordsToFind.add("JACKET");
-        wordsToFind.add("LEAF");
-        wordsToFind.add("PUMPKIN");
-        wordsToFind.add("RAKE");
-        wordsToFind.add("SCHOOL");
+        wordBank = getIntent().getStringArrayListExtra("wordBankLetters");
         toHighlight = new ArrayList<>();
-        int dim = (int) Math.sqrt(letters.length());
+        int dim = (int) Math.sqrt(wordSearchLetters.length());
         wordSearchArr = new String[dim][dim];
 
         for (int i = 0; i < dim; i++) {
@@ -63,11 +56,11 @@ public class Results extends AppCompatActivity {
 
         solver = new WordSearchSolver(wordSearchArr);
 
-        for (int i = 0; i < letters.length(); i++) {
-            wordSearch.add(letters.charAt(i) + "");
+        for (int i = 0; i < wordSearchLetters.length(); i++) {
+            wordSearch.add(wordSearchLetters.charAt(i) + "");
         }
 
-        for (String s : wordsToFind) {
+        for (String s : wordBank) {
             for (int i = 0; i < wordSearchArr.length; i++) {
                 for (int j = 0; j < wordSearchArr[i].length; j++) {
                     int[] results = solver.search(i, j, s);

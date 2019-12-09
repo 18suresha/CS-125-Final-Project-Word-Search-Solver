@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mainbackground"
-    tools:context=".EnterTheWords">
+    tools:context=".EnterTheWordSearch">
 
     <Button
-        android:id="@+id/wordBankButton"
+        android:id="@+id/wordSearchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_bright"
@@ -16,38 +16,35 @@
         android:text="Select"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wordBankEditText"
-        app:layout_constraintVertical_bias="0.678" />
+        app:layout_constraintTop_toBottomOf="@+id/wordSearchEditText" />
 
     <EditText
-        android:id="@+id/wordBankEditText"
+        android:id="@+id/wordSearchEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter your words here!"
+        android:hint="Edit the text here!"
         android:inputType="textPersonName"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wordBankText"
-        app:layout_constraintVertical_bias="0.407" />
+        app:layout_constraintTop_toBottomOf="@+id/wordSearchText"
+        app:layout_constraintVertical_bias="0.38" />
 
     <TextView
-        android:id="@+id/wordBankText"
-        android:layout_width="275dp"
+        android:id="@+id/wordSearchText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/comfortaa"
-        android:text="Enter the words in the text box below separated by spaces"
+        android:fontFamily="@font/comfortaa_bold"
+        android:text="Click the button below to select a picture of your word search"
         android:textAlignment="center"
-        android:textColor="#A80939"
-        android:textSize="26sp"
-        android:textStyle="bold"
+        android:textColor="#E53935"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
-
+        app:layout_constraintVertical_bias="0.106" />
 </androidx.constraintlayout.widget.ConstraintLayout>

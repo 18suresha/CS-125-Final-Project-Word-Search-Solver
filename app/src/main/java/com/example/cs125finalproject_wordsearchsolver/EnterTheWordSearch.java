@@ -17,53 +17,42 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.googlecode.tesseract.android.TessBaseAPI;
 
-import java.util.ArrayList;
-
-import static com.example.cs125finalproject_wordsearchsolver.EnterTheWordSearch.GALLERY_REQUEST_CODE;
-
-public class EnterTheWords extends AppCompatActivity {
-
-    Button wordBankButton;
-    TextView wordBankText;
-    EditText wordBankEditText;
-    ArrayList<String> wordBankLetters;
+public class EnterTheWordSearch extends AppCompatActivity {
+    Button wordSearchButton;
+    TextView wordSearchText;
+    EditText wordSearchEditText;
     String wordSearchLetters;
+    public static final int GALLERY_REQUEST_CODE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enter_the_words);
+        setContentView(R.layout.activity_enter_the_word_search);
 
-        wordBankButton = findViewById(R.id.wordBankButton);
-        wordBankText = findViewById(R.id.wordBankText);
-        wordBankEditText = findViewById(R.id.wordBankEditText);
-        wordSearchLetters = getIntent().getStringExtra("wordSearchLetters");
-        wordBankButton.setOnClickListener(new View.OnClickListener() {
+        wordSearchButton = findViewById(R.id.wordSearchButton);
+        wordSearchText = findViewById(R.id.wordSearchText);
+        wordSearchEditText = findViewById(R.id.wordSearchEditText);
+        wordSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = wordBankButton.getText().toString().toLowerCase();
+                String text = wordSearchButton.getText().toString().toLowerCase();
                 if (text.equals("select")) {
                     pickFromGallery();
-                    //do text recog
-                    wordBankButton.setText("Continue");
-                    wordBankText.setText(makeWordString(wordBankLetters));
-                    wordBankEditText.setText(makeWordString(wordBankLetters));
+                    //do the capture stuff
+                    wordSearchButton.setText("Continue");
+                    wordSearchText.setText(wordSearchLetters);
+                    wordSearchEditText.setText(wordSearchLetters);
                 } else {
-                    String temp = wordBankEditText.getText().toString();
-                    wordBankLetters.clear();
-                    for (String s : temp.split("\n ")) {
-                        wordBankLetters.add(s);
-                    }
-                    Intent results = new Intent(EnterTheWords.this, Results.class);
-                    results.putExtra("wordBankLetters", wordBankLetters);
-                    results.putExtra("wordSearchLetters", wordSearchLetters);
-                    startActivity(results);
+                    Intent capWords = new Intent(EnterTheWordSearch.this, EnterTheWords.class);
+                    capWords.putExtra("wordSearchLetters", wordSearchLetters);
+                    startActivity(capWords);
                     finish();
                 }
             }
         });
-        wordBankEditText.addTextChangedListener(new TextWatcher() {
+        wordSearchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -71,7 +60,8 @@ public class EnterTheWords extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                wordBankText.setText(s);
+                wordSearchText.setText(s);
+                wordSearchLetters = s.toString();
             }
 
             @Override
@@ -91,7 +81,8 @@ public class EnterTheWords extends AppCompatActivity {
         // Launching the Intent
         startActivityForResult(intent, GALLERY_REQUEST_CODE);
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
         // Result code is RESULT_OK only if the user selects an Image
         if (resultCode == Activity.RESULT_OK)
             switch (requestCode){
@@ -115,23 +106,10 @@ public class EnterTheWords extends AppCompatActivity {
                     MyTessOCR mTessOCR;
                     mTessOCR = new MyTessOCR(this);
 
-                    String temp = mTessOCR.getOCRResult(bmp);
-                    for (String s : temp.split("\n ")) {
-                        for (String s1 : s.split(" ")) {
-                            wordBankLetters.add(s1);
-                            System.out.println(s1);
-                        }
-                    }
+                    wordSearchLetters = mTessOCR.getOCRResult(bmp);
+
                     break;
 
             }
-    }
-    private String makeWordString(ArrayList<String> s) {
-        String toReturn = "";
-        for (String str : s) {
-            toReturn += str;
-            toReturn += "\n";
-        }
-        return toReturn;
     }
 }
