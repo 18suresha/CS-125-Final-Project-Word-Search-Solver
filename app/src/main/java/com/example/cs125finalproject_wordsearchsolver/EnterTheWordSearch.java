@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 public class EnterTheWordSearch extends AppCompatActivity {
@@ -42,10 +44,13 @@ public class EnterTheWordSearch extends AppCompatActivity {
                     pickFromGallery();
                     //do the capture stuff
                     wordSearchButton.setText("Continue");
-                    wordSearchText.setText(wordSearchLetters);
-                    wordSearchEditText.setText(wordSearchLetters);
+                    wordSearchEditText.setVisibility(View.VISIBLE);
+
                 } else {
                     Intent capWords = new Intent(EnterTheWordSearch.this, EnterTheWords.class);
+                    wordSearchLetters.replaceAll(" ", "");
+                    wordSearchLetters.replaceAll("\n", "");
+                    wordSearchLetters = wordSearchLetters.toUpperCase();
                     capWords.putExtra("wordSearchLetters", wordSearchLetters);
                     startActivity(capWords);
                     finish();
@@ -107,7 +112,9 @@ public class EnterTheWordSearch extends AppCompatActivity {
                     mTessOCR = new MyTessOCR(this);
 
                     wordSearchLetters = mTessOCR.getOCRResult(bmp);
-
+                    wordSearchText.setText(wordSearchLetters);
+                    wordSearchEditText.setText(wordSearchLetters);
+                    Toast.makeText(this, "Make sure to double check the input!", Toast.LENGTH_SHORT).show();
                     break;
 
             }

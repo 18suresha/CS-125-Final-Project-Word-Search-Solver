@@ -39,6 +39,7 @@ public class EnterTheWords extends AppCompatActivity {
         wordBankText = findViewById(R.id.wordBankText);
         wordBankEditText = findViewById(R.id.wordBankEditText);
         wordSearchLetters = getIntent().getStringExtra("wordSearchLetters");
+        wordBankLetters = new ArrayList<>();
         wordBankButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,13 +48,13 @@ public class EnterTheWords extends AppCompatActivity {
                     pickFromGallery();
                     //do text recog
                     wordBankButton.setText("Continue");
-                    wordBankText.setText(makeWordString(wordBankLetters));
-                    wordBankEditText.setText(makeWordString(wordBankLetters));
                 } else {
                     String temp = wordBankEditText.getText().toString();
                     wordBankLetters.clear();
-                    for (String s : temp.split("\n ")) {
-                        wordBankLetters.add(s);
+                    for (String t : temp.split("\n")) {
+                        for (String s : temp.split(" ")) {
+                            wordBankLetters.add(s);
+                        }
                     }
                     Intent results = new Intent(EnterTheWords.this, Results.class);
                     results.putExtra("wordBankLetters", wordBankLetters);
@@ -122,6 +123,8 @@ public class EnterTheWords extends AppCompatActivity {
                             System.out.println(s1);
                         }
                     }
+                    wordBankText.setText(makeWordString(wordBankLetters));
+                    wordBankEditText.setText(makeWordString(wordBankLetters));
                     break;
 
             }
