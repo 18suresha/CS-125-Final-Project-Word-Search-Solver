@@ -19,8 +19,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.googlecode.tesseract.android.TessBaseAPI;
-
 public class EnterTheWordSearch extends AppCompatActivity {
     Button wordSearchButton;
     TextView wordSearchText;

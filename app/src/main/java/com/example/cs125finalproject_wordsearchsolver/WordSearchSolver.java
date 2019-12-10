@@ -7,35 +7,35 @@ import android.util.Log;
 public class WordSearchSolver {
 
     private String[][] wordSearch;
-    private int[] x = { -1, -1, -1, 0, 0, 1, 1, 1 };
-    private int[] y = { -1, 0, 1, -1, 1, -1, 0, 1 };
+    private int[] xdir = { -1, -1, -1, 0, 0, 1, 1, 1 };
+    private int[] ydir = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
     WordSearchSolver(String[][] wordSearchEntry){
         wordSearch = wordSearchEntry;
     }
 
-    public int[] search(int row, int col, String word) {
-        if (!(wordSearch[row][col].equals(word.charAt(0) + ""))) {
+    public int[] search(int x, int y, String word) {
+        if (!(wordSearch[x][y].equals(word.charAt(0) + ""))) {
             return new int[] {-1};
         }
 
         for (int dir = 0; dir < 8; dir++) {
-            int k;
-            int rd = row + x[dir];
-            int cd = col + y[dir];
-            for (k = 1; k < word.length(); k++) {
-                if (rd >= wordSearch[0].length || rd < 0 || cd >= wordSearch.length || cd < 0) {
+            int foundWordLen;
+            int xFound = x + xdir[dir];
+            int yFound = y + ydir[dir];
+            for (foundWordLen = 1; foundWordLen < word.length(); foundWordLen++) {
+                if (xFound >= wordSearch[0].length || xFound < 0 || yFound >= wordSearch.length || yFound < 0) {
                     break;
                 }
-                if (!wordSearch[rd][cd].equals(word.charAt(k) + "")) {
+                if (!wordSearch[xFound][yFound].equals(word.charAt(foundWordLen) + "")) {
                     break;
                 }
-                rd += x[dir];
-                cd += y[dir];
+                xFound += xdir[dir];
+                yFound += ydir[dir];
             }
-            if (k == word.length()) {
+            if (foundWordLen == word.length()) {
                 Log.d("RESULTS", word);
-                return new int[] {dir, row, col};
+                return new int[] {dir, x, y};
             }
         }
         return new int[] {-1};
